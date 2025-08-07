@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Premium Photography Gallery</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+    /* Gallery Section Styling */
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #f8f9fa;
+    }
+    
+    .gallery-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.8rem;
+        color: #2c3e50;
+        position: relative;
+        padding-bottom: 15px;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+    
+    .gallery-subtitle {
+        text-align: center;
+        color: #6c757d;
+        margin-bottom: 2.5rem;
+        font-size: 1.1rem;
+    }
+    
+    .gallery-title:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: #e74c3c;
+    }
+    
+    /* Gallery Filter Buttons */
+    .filter-btn {
+        background: transparent;
+        color: #2c3e50;
+        border: 2px solid #e74c3c;
+        border-radius: 30px;
+        padding: 8px 20px;
+        margin: 5px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .filter-btn:hover, .filter-btn.active {
+        background: #e74c3c;
+        color: white;
+        transform: translateY(-2px);
+    }
+    
+    .filter-btn.active {
+        box-shadow: 0 4px 8px rgba(231, 76, 60, 0.3);
+    }
+    
+    /* Gallery Card */
+    .gallery-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: all 0.4s ease;
+        height: 100%;
+    }
+    
+    .gallery-card img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        transition: transform 0.5s ease, filter 0.3s ease;
+    }
+    
+    .gallery-card:hover {
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        transform: translateY(-5px);
+    }
+    
+    .gallery-card:hover img {
+        transform: scale(1.05);
+    }
+    
+    /* Gallery Overlay */
+    .gallery-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(231, 76, 60, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .gallery-card:hover .gallery-overlay {
+        opacity: 1;
+    }
+    
+    .gallery-content {
+        text-align: center;
+        padding: 20px;
+        color: white;
+        transform: translateY(20px);
+        transition: transform 0.3s ease;
+    }
+    
+    .gallery-card:hover .gallery-content {
+        transform: translateY(0);
+    }
+    
+    .gallery-content h5 {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+        font-weight: 600;
+    }
+    
+    .gallery-zoom {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        background: white;
+        color: #e74c3c;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        transition: all 0.3s ease;
+    }
+    
+    .gallery-zoom:hover {
+        transform: scale(1.1);
+        background: #2c3e50;
+        color: white;
+    }
+    
+    /* Lightbox Customization */
+    .lb-nav a.lb-prev, 
+    .lb-nav a.lb-next {
+        opacity: 1 !important;
+        filter: none !important;
+    }
+    
+    .lb-nav a.lb-prev {
+        left: -100px;
+    }
+    
+    .lb-nav a.lb-next {
+        right: -100px;
+    }
+    
+    .lb-data .lb-close {
+        display: block !important;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: rgba(0,0,0,0.8);
+        color: white;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        opacity: 1 !important;
+        filter: none !important;
+        z-index: 2000;
+        transition: all 0.3s ease;
+    }
+    
+    .lb-data .lb-close:hover {
+        background: #e74c3c;
+        transform: scale(1.1);
+    }
+    
+    .lb-data .lb-close::before {
+        content: '\2715'; /* Unicode for cross symbol */
+        font-family: 'bootstrap-icons';
+        font-size: 1.2rem;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+        .lb-nav a.lb-prev {
+            left: -50px;
+        }
+        
+        .lb-nav a.lb-next {
+            right: -50px;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .gallery-title {
+            font-size: 2rem;
+        }
+        
+        .filter-btn {
+            padding: 6px 15px;
+            font-size: 0.9rem;
+        }
+        
+        .gallery-content h5 {
+            font-size: 1.1rem;
+        }
+        
+        .gallery-zoom {
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 1.2rem;
+        }
+        
+        .lb-nav a.lb-prev {
+            left: 10px;
+        }
+        
+        .lb-nav a.lb-next {
+            right: 10px;
+        }
+        
+        .lb-data .lb-close {
+            top: 15px;
+            right: 15px;
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
+        }
+    }
+</style>
+</head>
+<body>
+<div class="container py-5">
+  <h1 class="gallery-title">Premium Gallery</h1>
+  <p class="gallery-subtitle">Explore our collection of stunning photography</p>
+  
+  <!-- Filter Buttons -->
+  <div class="text-center mb-5">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="wedding">Weddings</button>
+    <button class="filter-btn" data-filter="portrait">Portraits</button>
+    <button class="filter-btn" data-filter="event">Bride</button>
+    <button class="filter-btn" data-filter="baby">Candid</button>
+  </div>
+  
+  <!-- Gallery Grid -->
+  <div class="row" id="gallery-grid">
+    <!-- g1 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="wedding">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Wedding Photo 1" href="images/gallery/g1.jpg">
+          <img alt="Wedding Photo 1" class="img-fluid" src="images/gallery/g1.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Wedding Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g2 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="portrait">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Portrait Photo 2" href="images/gallery/g2.jpg">
+          <img alt="Portrait Photo 2" class="img-fluid" src="images/gallery/g2.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Portrait Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g3 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="event">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Bride Photo 3" href="images/gallery/g3.jpg">
+          <img alt="Bride Photo 3" class="img-fluid" src="images/gallery/g3.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Bride Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g4 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="baby">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Candid Photo 4" href="images/gallery/g4.jpg">
+          <img alt="Candid Photo 4" class="img-fluid" src="images/gallery/g4.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Candid Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g5 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="wedding">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Wedding Photo 5" href="images/gallery/g5.jpg">
+          <img alt="Wedding Photo 5" class="img-fluid" src="images/gallery/g5.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Wedding Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g6 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="portrait">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Portrait Photo 6" href="images/gallery/g6.jpg">
+          <img alt="Portrait Photo 6" class="img-fluid" src="images/gallery/g6.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Portrait Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g7 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="event">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Bride Photo 7" href="images/gallery/g7.jpg">
+          <img alt="Bride Photo 7" class="img-fluid" src="images/gallery/g7.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Bride Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g8 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="baby">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Candid Photo 8" href="images/gallery/g8.jpg">
+          <img alt="Candid Photo 8" class="img-fluid" src="images/gallery/g8.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Candid Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g9 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="wedding">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Wedding Photo 9" href="images/gallery/g9.jpg">
+          <img alt="Wedding Photo 9" class="img-fluid" src="images/gallery/g9.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Wedding Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g10 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="portrait">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Portrait Photo 10" href="images/gallery/g10.jpg">
+          <img alt="Portrait Photo 10" class="img-fluid" src="images/gallery/g10.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Portrait Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g11 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="event">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Bride Photo 11" href="images/gallery/g11.jpg">
+          <img alt="Bride Photo 11" class="img-fluid" src="images/gallery/g11.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Bride Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g12 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="baby">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Candid Photo 12" href="images/gallery/g12.jpg">
+          <img alt="Candid Photo 12" class="img-fluid" src="images/gallery/g12.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Candid Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g13 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="wedding">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Wedding Photo 13" href="images/gallery/g13.jpg">
+          <img alt="Wedding Photo 13" class="img-fluid" src="images/gallery/g13.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Wedding Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g14 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="portrait">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Portrait Photo 14" href="images/gallery/g14.jpg">
+          <img alt="Portrait Photo 14" class="img-fluid" src="images/gallery/g14.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Portrait Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g15 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="event">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Bride Photo 15" href="images/gallery/g15.jpg">
+          <img alt="Bride Photo 15" class="img-fluid" src="images/gallery/g15.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Bride Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g16 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="baby">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Candid Photo 16" href="images/gallery/g16.jpg">
+          <img alt="Candid Photo 16" class="img-fluid" src="images/gallery/g16.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Candid Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g17 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="wedding">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Wedding Photo 17" href="images/gallery/g17.jpg">
+          <img alt="Wedding Photo 17" class="img-fluid" src="images/gallery/g17.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Wedding Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g18 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="portrait">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Portrait Photo 18" href="images/gallery/g18.jpg">
+          <img alt="Portrait Photo 18" class="img-fluid" src="images/gallery/g18.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Portrait Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g19 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="event">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Bride Photo 19" href="images/gallery/g19.jpg">
+          <img alt="Bride Photo 19" class="img-fluid" src="images/gallery/g19.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Bride Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g20 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="baby">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Candid Photo 20" href="images/gallery/g20.jpg">
+          <img alt="Candid Photo 20" class="img-fluid" src="images/gallery/g20.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Candid Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g21 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="wedding">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Wedding Photo 21" href="images/gallery/g21.jpg">
+          <img alt="Wedding Photo 21" class="img-fluid" src="images/gallery/g21.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Wedding Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g22 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="portrait">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Portrait Photo 22" href="images/gallery/g22.jpg">
+          <img alt="Portrait Photo 22" class="img-fluid" src="images/gallery/g22.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Portrait Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g23 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="event">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Bride Photo 23" href="images/gallery/g23.jpg">
+          <img alt="Bride Photo 23" class="img-fluid" src="images/gallery/g23.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Bride Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g24 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="baby">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Candid Photo 24" href="images/gallery/g24.jpg">
+          <img alt="Candid Photo 24" class="img-fluid" src="images/gallery/g24.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Candid Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g25 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="wedding">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Wedding Photo 25" href="images/gallery/g25.jpg">
+          <img alt="Wedding Photo 25" class="img-fluid" src="images/gallery/g25.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Wedding Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g26 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="portrait">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Portrait Photo 26" href="images/gallery/g26.jpg">
+          <img alt="Portrait Photo 26" class="img-fluid" src="images/gallery/g26.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Portrait Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g27 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="event">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Bride Photo 27" href="images/gallery/g27.jpg">
+          <img alt="Bride Photo 27" class="img-fluid" src="images/gallery/g27.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Bride Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g28 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="baby">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Candid Photo 28" href="images/gallery/g28.jpg">
+          <img alt="Candid Photo 28" class="img-fluid" src="images/gallery/g28.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Candid Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g29 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="wedding">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Wedding Photo 29" href="images/gallery/g29.jpg">
+          <img alt="Wedding Photo 29" class="img-fluid" src="images/gallery/g29.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Wedding Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g30 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="portrait">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Portrait Photo 30" href="images/gallery/g30.jpg">
+          <img alt="Portrait Photo 30" class="img-fluid" src="images/gallery/g30.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Portrait Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g31 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="event">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Bride Photo 31" href="images/gallery/g31.jpg">
+          <img alt="Bride Photo 31" class="img-fluid" src="images/gallery/g31.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Bride Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g32 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="baby">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Candid Photo 32" href="images/gallery/g32.jpg">
+          <img alt="Candid Photo 32" class="img-fluid" src="images/gallery/g32.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Candid Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g33 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="wedding">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Wedding Photo 33" href="images/gallery/g33.jpg">
+          <img alt="Wedding Photo 33" class="img-fluid" src="images/gallery/g33.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Wedding Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- g34 -->
+    <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="portrait">
+      <div class="gallery-card">
+        <a data-lightbox="gallery" data-title="Portrait Photo 34" href="images/gallery/g34.jpg">
+          <img alt="Portrait Photo 34" class="img-fluid" src="images/gallery/g34.jpg" />
+          <div class="gallery-overlay">
+            <div class="gallery-content">
+              <h5>Portrait Photo</h5>
+              <div class="gallery-zoom">
+                <i class="bi bi-zoom-in"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const galleryItems = document.querySelectorAll('.gallery-item');
+
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+          const filter = this.getAttribute('data-filter');
+
+          galleryItems.forEach(item => {
+            const category = item.getAttribute('data-category');
+            if (filter === 'all' || category === filter) {
+              item.style.display = 'block';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+</script>
+
+<script>
+    lightbox.option({
+      'resizeDuration': 200,
+      'wrapAround': true,
+      'fadeDuration': 200,
+      'imageFadeDuration': 200,
+      'showImageNumberLabel': true,
+      'disableScrolling': true,
+      'alwaysShowNavOnTouchDevices': true,
+      'fitImagesInViewport': true,
+      'positionFromTop': 100
+    });
+
+    // Ensure close button is functional
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('lb-close')) {
+        lightbox.end();
+      }
+    });
+</script>
+
+</body>
+</html>

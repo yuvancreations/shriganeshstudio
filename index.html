@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shri Ganesh Studio - Professional Photography in Haridwar</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Lightbox CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #D4AF37;
+            --accent-color: #800020;
+            --light-color: #ffffff;
+            --dark-color: #333333;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            color: var(--dark-color);
+        }
+        
+        .navbar {
+            background-color: var(--primary-color) !important;
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--secondary-color) !important;
+        }
+        
+        .nav-link {
+            color: var(--light-color) !important;
+            font-weight: 500;
+            margin: 0 10px;
+            position: relative;
+        }
+        
+        .nav-link:before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--secondary-color);
+            visibility: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .nav-link:hover:before {
+            visibility: visible;
+            width: 100%;
+        }
+        
+        .nav-link.active:before {
+            visibility: visible;
+            width: 100%;
+        }
+        
+        .hero-section {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1630&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--light-color);
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        .btn-primary-custom {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            margin: 10px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary-custom:hover {
+            background-color: var(--accent-color);
+            color: var(--light-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-outline-custom {
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            background-color: transparent;
+            padding: 10px 28px;
+            font-weight: 600;
+            margin: 10px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-custom:hover {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 50px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .about-section, .gallery-section, .contact-section {
+            padding: 100px 0;
+        }
+        
+        .about-img {
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .about-img:hover {
+            transform: scale(1.03);
+        }
+        
+        .service-card {
+            background-color: var(--light-color);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border-top: 3px solid var(--secondary-color);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-icon {
+            font-size: 40px;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        
+        .gallery-item {
+            margin-bottom: 30px;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-item img {
+            transition: all 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .contact-info {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            padding: 30px;
+            border-radius: 10px;
+            height: 100%;
+        }
+        
+        .contact-info i {
+            color: var(--secondary-color);
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        .form-control {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .form-control:focus {
+            box-shadow: none;
+            border-color: var(--secondary-color);
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            color: #FFF;
+            transform: scale(1.1);
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            padding: 50px 0 20px;
+        }
+        
+        .footer-links h5 {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: var(--light-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--light-color);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+            
+            .about-section, .gallery-section, .contact-section {
+                padding: 60px 0;
+            }
+            
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 25px;
+            }
+        }
+
+        .logo-img {
+    height: 100px; /* Adjust size as needed */
+    width: auto;
+    vertical-align: middle;
+}
+
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="100">
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/919557306414" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container align-items-center">
+        <a class="navbar-brand d-flex align-items-center" href="#home">
+            <img src="Images/logooutline.webp" alt="Shri Ganesh Studio Logo" class="logo-img me-2">
+            <span>Shri Ganesh Studio</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#gallery">Gallery</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+                <h1>Shri Ganesh Studio</h1>
+                <p>Capturing Moments, Creating Memories</p>
+                <div>
+                    <a href="#gallery" class="btn btn-primary-custom">View Gallery</a>
+                    <a href="#contact" class="btn btn-outline-custom">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section bg-light">
+        <div class="container">
+            <h2 class="text-center section-title" data-aos="fade-up">About Us</h2>
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <img src="https://images.unsplash.com/photo-1522206024047-9c925421675b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1587&q=80" alt="About Shri Ganesh Studio" class="img-fluid about-img">
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <h3>Professional Photography Studio in Haridwar</h3>
+                    <p>Welcome to Shri Ganesh Studio, your premier photography destination in Haridwar. With years of experience in the industry, we specialize in capturing life's most precious moments with creativity and professionalism.</p>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="100">
+                            <div class="service-card">
+                                <div class="service-icon">
+                                    <i class="fas fa-camera-retro"></i>
+                                </div>
+                                <h4>Professional Photography</h4>
+                                <p>High-quality photography services for all occasions with state-of-the-art equipment.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="service-card">
+                                <div class="service-icon">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <h4>Wedding Shoots</h4>
+                                <p>Beautiful wedding photography that captures the emotion and beauty of your special day.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="300">
+                            <div class="service-card">
+                                <div class="service-icon">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                                <h4>Portraits</h4>
+                                <p>Professional portrait photography for individuals, families, and professionals.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="400">
+                            <div class="service-card">
+                                <div class="service-icon">
+                                    <i class="fas fa-images"></i>
+                                </div>
+                                <h4>Photo Albums</h4>
+                                <p>Custom-designed photo albums to preserve your memories in an elegant format.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Ultimate Gallery Section with Perfect Filtering -->
+<section id="gallery" class="gallery-section py-5">
+    <div class="container">
+        <h2 class="text-center section-title mb-5">Our Gallery</h2>
+        
+        <!-- Gallery Filter Buttons -->
+        <div class="text-center mb-5">
+            <div class="btn-group flex-wrap" role="group">
+                <button type="button" class="btn filter-btn active" data-filter="all">All</button>
+                <button type="button" class="btn filter-btn" data-filter="wedding">Weddings</button>
+                <button type="button" class="btn filter-btn" data-filter="portrait">Portraits</button>
+                <button type="button" class="btn filter-btn" data-filter="event">Events</button>
+                <button type="button" class="btn filter-btn" data-filter="baby">Candid</button>
+            </div>
+        </div>
+
+        <div class="row gallery-container">
+            <!-- Wedding Photos -->
+            <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="wedding">
+                <div class="gallery-card">
+                    <img src="Images/gallery/g34.jpg" 
+                         alt="Wedding Photography" 
+                         class="img-fluid">
+                    <div class="gallery-overlay">
+                        <div class="gallery-content">
+                            <h5>Wedding Photography</h5>
+                            <a href="Images/gallery/g34.jpg" 
+                               class="gallery-zoom" 
+                               data-lightbox="gallery"
+                               data-title="Wedding Photography">
+                                <i class="bi bi-zoom-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Portrait Photos -->
+            <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="portrait">
+                <div class="gallery-card">
+                    <img src="Images/gallery/g30.jpg" 
+                         alt="Portrait Photography" 
+                         class="img-fluid">
+                    <div class="gallery-overlay">
+                        <div class="gallery-content">
+                            <h5>Portrait Photography</h5>
+                            <a href="Images/gallery/g30.jpg" 
+                               class="gallery-zoom" 
+                               data-lightbox="gallery"
+                               data-title="Portrait Photography">
+                                <i class="bi bi-zoom-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Candid  -->
+            <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="baby">
+                <div class="gallery-card">
+                    <img src="Images/gallery/g22.jpg" 
+                         alt="Baby Shoots" 
+                         class="img-fluid">
+                    <div class="gallery-overlay">
+                        <div class="gallery-content">
+                            <h5>Candid Photography</h5>
+                            <a href="Images/gallery/g22.jpg" 
+                               class="gallery-zoom" 
+                               data-lightbox="gallery"
+                               data-title="Baby Shoots">
+                                <i class="bi bi-zoom-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bridel -->
+            <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="event">
+                <div class="gallery-card">
+                    <img src="Images/gallery/g20.jpg" 
+                         alt="Event Photography" 
+                         class="img-fluid">
+                    <div class="gallery-overlay">
+                        <div class="gallery-content">
+                            <h5>Event Photography</h5>
+                            <a href="Images/gallery/g20.jpg" 
+                               class="gallery-zoom" 
+                               data-lightbox="gallery"
+                               data-title="Event Photography">
+                                <i class="bi bi-zoom-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Family Portraits -->
+            <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="portrait">
+                <div class="gallery-card">
+                    <img src="Images/gallery/g15.jpg" 
+                         alt="Family Portraits" 
+                         class="img-fluid">
+                    <div class="gallery-overlay">
+                        <div class="gallery-content">
+                            <h5>Family Portraits</h5>
+                            <a href="Images/gallery/g15.jpg" 
+                               class="gallery-zoom" 
+                               data-lightbox="gallery"
+                               data-title="Family Portraits">
+                                <i class="bi bi-zoom-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Professional Headshots -->
+            <div class="col-lg-4 col-md-6 mb-4 gallery-item" data-category="portrait">
+                <div class="gallery-card">
+                    <img src="Images/gallery/g4.jpg" 
+                         alt="Professional Headshots" 
+                         class="img-fluid">
+                    <div class="gallery-overlay">
+                        <div class="gallery-content">
+                            <h5>Professional Headshots</h5>
+                            <a href="Images/gallery/g4.jpg" 
+                               class="gallery-zoom" 
+                               data-lightbox="gallery"
+                               data-title="Professional Headshots">
+                                <i class="bi bi-zoom-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- View More Button styled as Button -->
+<div class="text-center mt-4">
+    <a href="gallery.html" class="btn btn-primary btn-lg">View More Photos</a>
+</div>
+
+</section>
+
+<style>
+    /* Gallery Section Styling */
+    .gallery-section {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+    
+    .section-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
+        color: #2c3e50;
+        position: relative;
+        padding-bottom: 15px;
+        font-weight: 700;
+    }
+    
+    .section-title:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: #e74c3c;
+    }
+    
+    /* Gallery Filter Buttons */
+    .filter-btn {
+        background: transparent;
+        color: #2c3e50;
+        border: 2px solid #e74c3c;
+        border-radius: 30px;
+        padding: 8px 20px;
+        margin: 5px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .filter-btn:hover, .filter-btn.active {
+        background: #e74c3c;
+        color: white;
+        transform: translateY(-2px);
+    }
+    
+    .filter-btn.active {
+        box-shadow: 0 4px 8px rgba(231, 76, 60, 0.3);
+    }
+    
+    /* Gallery Card */
+    .gallery-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: all 0.4s ease;
+        height: 100%;
+    }
+    
+    .gallery-card img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        transition: transform 0.5s ease, filter 0.3s ease;
+    }
+    
+    .gallery-card:hover {
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        transform: translateY(-5px);
+    }
+    
+    .gallery-card:hover img {
+        transform: scale(1.05);
+    }
+    
+    /* Gallery Overlay */
+    .gallery-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(231, 76, 60, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .gallery-card:hover .gallery-overlay {
+        opacity: 1;
+    }
+    
+    .gallery-content {
+        text-align: center;
+        padding: 20px;
+        color: white;
+        transform: translateY(20px);
+        transition: transform 0.3s ease;
+    }
+    
+    .gallery-card:hover .gallery-content {
+        transform: translateY(0);
+    }
+    
+    .gallery-content h5 {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+        font-weight: 600;
+    }
+    
+    .gallery-zoom {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        background: white;
+        color: #e74c3c;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        transition: all 0.3s ease;
+    }
+    
+    .gallery-zoom:hover {
+        transform: scale(1.1);
+        background: #2c3e50;
+        color: white;
+    }
+    
+    /* View More Button */
+    .btn-primary {
+        background-color: #e74c3c;
+        border-color: #e74c3c;
+        padding: 10px 30px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+        background-color: #c0392b;
+        border-color: #c0392b;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .section-title {
+            font-size: 2rem;
+        }
+        
+        .filter-btn {
+            padding: 6px 15px;
+            font-size: 0.9rem;
+        }
+        
+        .gallery-content h5 {
+            font-size: 1.1rem;
+        }
+        
+        .gallery-zoom {
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 1.2rem;
+        }
+        
+        .btn-primary {
+            padding: 8px 20px;
+            font-size: 1rem;
+        }
+    }
+</style>
+
+<!-- Bootstrap 5 and Lightbox JS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+
+<!-- JavaScript for Perfect Filtering -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        
+        // Initialize - show all items
+        galleryItems.forEach(item => {
+            item.style.display = 'block';
+        });
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Play click sound
+                const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3');
+                audio.volume = 0.3;
+                audio.play();
+                
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const filterValue = this.getAttribute('data-filter');
+                
+                // Filter items with smooth transition
+                galleryItems.forEach(item => {
+                    item.style.opacity = '0';
+                    setTimeout(() => {
+                        const itemCategory = item.getAttribute('data-category');
+                        
+                        if (filterValue === 'all' || itemCategory === filterValue) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                        item.style.opacity = '1';
+                    }, 200);
+                });
+            });
+        });
+        
+        // Add click effect to zoom buttons
+        document.querySelectorAll('.gallery-zoom').forEach(zoom => {
+            zoom.addEventListener('click', function() {
+                const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-camera-shutter-click-1133.mp3');
+                audio.volume = 0.2;
+                audio.play();
+            });
+        });
+    });
+
+    
+</script>
+
+
+<!-- Contact Section -->
+<section id="contact" class="contact-section bg-light">
+    <div class="container">
+        <h2 class="text-center section-title" data-aos="fade-up">Contact Us</h2>
+        <div class="row">
+            <div class="col-lg-6" data-aos="fade-right">
+                <div class="contact-info">
+                    <h3 class="mb-4">Get In Touch</h3>
+                    <p><i class="fas fa-map-marker-alt"></i>Chowk Bazar, Kankhal, Haridwar – 249408</p>
+                    <p><i class="fas fa-phone"></i> 9557306414</p>
+                    <p><i class="fas fa-envelope"></i> sgskankhal@gmail.com</p>
+                    
+                    <div class="mt-5">
+                        <h4>Business Hours</h4>
+                        <p><i class="far fa-clock"></i> Monday - Saturday: 9:00 AM - 8:00 PM</p>
+                        <p><i class="far fa-clock"></i> Sunday: 10:00 AM - 6:00 PM</p>
+                    </div>
+                    
+                    <div class="social-icons mt-5">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <form action="https://api.web3forms.com/submit" method="POST" id="contactForm">
+                    <input type="hidden" name="access_key" value="e9f21912-91bc-4032-9cd2-d9c3f9a818ef">
+                    <!-- Add subject if you want -->
+                    <input type="hidden" name="subject" value="New Contact Form Submission">
+                    <input type="hidden" name="redirect" value="https://yourwebsite.com/thank-you.html">
+                    <input type="checkbox" name="botcheck" id="" style="display: none;">
+                    
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Your Phone">
+                    </div>
+                    <div class="mb-3">
+                        <textarea class="form-control" id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+                    </div>
+                    <div class="h-captcha" data-captcha="true"></div>
+                    <button type="submit" class="btn btn-primary-custom w-100 mt-3">Send Message</button>
+                </form>
+                
+                <!-- This div will show success message after submission -->
+                <div id="result" class="mt-3"></div>
+            </div>
+        </div>
+        
+        <!-- Map Section Below Both Columns -->
+        <div class="row mt-5">
+            <div class="col-12" data-aos="fade-up">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3446.687866979938!2d78.159388315133!3d29.94698198181091!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390945e1c2f3e3a1%3A0x5b7b8a7a8a8a8a8a!2sChowk%20Bazar%2C%20Kankhal%2C%20Haridwar%2C%20Uttarakhand%20249408!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Add this JavaScript to handle form submission -->
+<script>
+    const form = document.getElementById('contactForm');
+    const result = document.getElementById('result');
+    
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+        
+        fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                result.innerHTML = "<div class='alert alert-success'>Thank you for your message! We'll contact you soon.</div>";
+                form.reset();
+            } else {
+                result.innerHTML = "<div class='alert alert-danger'>There was an error. Please try again later.</div>";
+            }
+        })
+        .catch(error => {
+            result.innerHTML = "<div class='alert alert-danger'>There was an error. Please try again later.</div>";
+        });
+    });
+</script>
+
+<!-- Footer -->
+<footer class="py-5">
+    <div class="container">
+        <!-- Top Row - Logo, Contact Info, and Links -->
+        <div class="row align-items-center">
+            <!-- Contact Info - Left Side -->
+            <div class="col-md-4 mb-4 mb-md-0 text-center text-md-start">
+                <h5>Contact Us</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Chowk Bazar, Kankhal, Haridwar</li>
+                    <li class="mb-2"><i class="fas fa-phone me-2"></i> 9557306414</li>
+                    <li><i class="fas fa-envelope me-2"></i> sgskankhal@gmail.com</li>
+                </ul>
+            </div>
+            
+            <!-- Logo - Center -->
+            <div class="col-md-4 mb-4 mb-md-0 text-center">
+                <img src="Images/logooutline.webp" alt="Shri Ganesh Studio Logo" class="footer-logo mb-3" style="height: 80px;">
+                <!-- Social Media Icons Below Logo -->
+                <div class="social-icons">
+                    <a href="#" class="mx-2"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="mx-2"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="mx-2"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="mx-2"><i class="fab fa-youtube"></i></a>
+                </div>
+                <p class="mt-2 mb-0">Capturing moments since 2010</p>
+            </div>
+            
+            <!-- Quick Links - Right Side -->
+            <div class="col-md-4 text-center text-md-end">
+                <div class="row">
+                    <div class="col-6">
+                        <h5>Quick Links</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="#home">Home</a></li>
+                            <li class="mb-2"><a href="#about">About</a></li>
+                            <li class="mb-2"><a href="#gallery">Gallery</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6">
+                        <h5>Services</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="#">Weddings</a></li>
+                            <li class="mb-2"><a href="#">Portraits</a></li>
+                            <li class="mb-2"><a href="#">Events</a></li>
+                            <li><a href="#">Editing</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Copyright Row -->
+        <hr class="my-4" style="background-color: rgba(255,255,255,0.1);">
+        <div class="row">
+            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                <p class="mb-0">&copy; 2025 Shri Ganesh Studio. All rights reserved.</p>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+    <p class="mb-0">Designed with <i class="fas fa-heart text-danger"></i> by 
+        <a href="tel:9557300217" class="text-decoration-none text-white">
+            <i class="fas fa-phone-alt me-1"></i> Yuvan Creations (9557300217)
+        </a>
+    </p>
+</div>
+        </div>
+    </div>
+</footer>
+
+<style>
+    footer {
+        background-color: #000;
+        color: #fff;
+    }
+    
+    .footer-logo {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    .social-icons a {
+        display: inline-block;
+        width: 36px;
+        height: 36px;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 36px;
+        transition: all 0.3s ease;
+    }
+    
+    .social-icons a:hover {
+        background-color: #D4AF37;
+        color: #000;
+        transform: translateY(-3px);
+    }
+    
+    footer a {
+        color: #fff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    
+    footer a:hover {
+        color: #D4AF37;
+    }
+    
+    footer h5 {
+        color: #D4AF37;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+    }
+    
+    @media (max-width: 768px) {
+        .footer-logo {
+            height: 60px;
+        }
+        
+        .social-icons a {
+            width: 32px;
+            height: 32px;
+            line-height: 32px;
+        }
+        
+        footer .col-md-4 {
+            margin-bottom: 2rem;
+        }
+        
+        footer .text-md-end {
+            text-align: center !important;
+        }
+    }
+</style>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Lightbox JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <script>
+        // Initialize AOS animation
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+        
+        // Navbar scroll effect
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 100) {
+                $('.navbar').addClass('scrolled');
+            } else {
+                $('.navbar').removeClass('scrolled');
+            }
+        });
+        
+        // Smooth scrolling for navigation links
+        $('a[href*="#"]').on('click', function(e) {
+            e.preventDefault();
+            
+            $('html, body').animate(
+                {
+                    scrollTop: $($(this).attr('href')).offset().top - 70,
+                },
+                500,
+                'linear'
+            );
+        });
+        
+        // Active nav link on scroll
+        $(window).scroll(function() {
+            var scrollDistance = $(window).scrollTop();
+            
+            $('section').each(function(i) {
+                if ($(this).position().top <= scrollDistance + 100) {
+                    $('.navbar-nav a.active').removeClass('active');
+                    $('.navbar-nav a').eq(i).addClass('active');
+                }
+            });
+        }).scroll();
+        
+        // Form submission
+        $('#contactForm').submit(function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will contact you soon.');
+            this.reset();
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+<script>
+    lightbox.option({
+      'resizeDuration': 200,
+      'wrapAround': true,
+      'fadeDuration': 200,
+      'imageFadeDuration': 200,
+      'showImageNumberLabel': true,
+      'disableScrolling': true
+    });
+</script>
+
+</body>
+</html>
