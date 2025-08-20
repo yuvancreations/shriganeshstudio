@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Shri Ganesh Studio</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --tertiary-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+            --text-accent: #667eea;
+            --neon-blue: #00f2fe;
+            --neon-pink: #f5576c;
+            --neon-purple: #667eea;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            background: var(--dark-gradient);
+            min-height: 100vh;
+            padding-top: 100px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-gradient);
+            border-radius: 10px;
+        }
+
+        /* Preloader with Modern Design */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease;
+        }
+
+        .preloader.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 3px solid transparent;
+            border-top: 3px solid var(--neon-blue);
+            border-right: 3px solid var(--neon-pink);
+            border-radius: 50%;
+            animation: modernSpin 1s linear infinite;
+            position: relative;
+        }
+
+        .loader::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 2px solid transparent;
+            border-left: 2px solid var(--neon-purple);
+            border-radius: 50%;
+            animation: modernSpin 0.8s linear infinite reverse;
+        }
+
+        @keyframes modernSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Navigation - Glassmorphism Design */
+        .navbar {
+            background: rgba(12, 12, 12, 0.95) !important;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1rem 0;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.5));
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--text-secondary) !important;
+            font-weight: 500;
+            margin: 0 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            padding: 12px 0 !important;
+        }
+
+        .navbar-nav .nav-link::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: var(--tertiary-gradient);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--text-primary) !important;
+            transform: translateY(-2px);
+        }
+
+        .navbar-nav .nav-link:hover::before {
+            width: 100%;
+        }
+
+        /* Section Styling - Modern */
+        .section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--neon-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .section-subtitle {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 300;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background: var(--tertiary-gradient);
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 10px;
+        }
+
+        /* Back Button */
+        .back-btn {
+            position: fixed;
+            top: 100px;
+            left: 20px;
+            z-index: 1000;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            color: var(--text-primary);
+            border: 1px solid var(--glass-border);
+            padding: 15px 20px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.1);
+            background: var(--primary-gradient);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            color: var(--text-primary);
+        }
+
+        /* Gallery Categories */
+        .gallery-categories {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .category-btn {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+            padding: 12px 30px;
+            margin: 0 10px 10px 0;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        .category-btn.active,
+        .category-btn:hover {
+            background: var(--primary-gradient);
+            color: var(--text-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Gallery Grid - 3D Modern */
+        .gallery {
+            background: var(--dark-gradient);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(245, 87, 108, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(102, 126, 234, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 25px;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-style: preserve-3d;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--secondary-gradient);
+            opacity: 0;
+            z-index: 2;
+            transition: opacity 0.4s ease;
+            border-radius: 25px;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 0.3;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-15px) rotateX(5deg) rotateY(5deg) scale(1.05);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-radius: 25px;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.2);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(12, 12, 12, 0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 3;
+            border-radius: 25px;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay i {
+            color: var(--neon-blue);
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: modernFloat 2s ease-in-out infinite;
+        }
+
+        @keyframes modernFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+            33% { transform: translateY(-20px) rotate(120deg) scale(1.1); }
+            66% { transform: translateY(10px) rotate(240deg) scale(0.9); }
+        }
+
+        .gallery-overlay h5 {
+            color: var(--text-primary);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            text-align: center;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-overlay p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-align: center;
+            font-weight: 300;
+        }
+
+        /* Modal Styling - Modern */
+        .modal-content {
+            background: rgba(12, 12, 12, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+        }
+
+        .modal-body {
+            padding: 0;
+        }
+
+        .modal-body img {
+            width: 100%;
+            border-radius: 25px;
+        }
+
+        /* Footer - Futuristic */
+        .footer {
+            background: linear-gradient(135deg, #0c0c0c 0%, #000000 100%);
+            color: var(--text-primary);
+            padding: 4rem 0 2rem;
+            text-align: center;
+            position: relative;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 4rem;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--tertiary-gradient);
+        }
+
+        .footer h5 {
+            color: var(--neon-blue);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+        }
+
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--neon-purple);
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            margin: 3rem 0;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            color: var(--neon-blue);
+            font-size: 1.5rem;
+            margin: 0 15px;
+            border-radius: 50%;
+            transition: all 0.4s ease;
+            border: 1px solid var(--glass-border);
+            transform: translateY(0);
+        }
+
+        .social-links a:hover {
+            background: var(--primary-gradient);
+            color: var(--text-primary);
+            transform: translateY(-10px) scale(1.1);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        .footer-logo {
+            height: 80px;
+            filter: brightness(0) invert(1);
+            transition: all 0.3s ease;
+        }
+
+        .footer-logo:hover {
+            filter: brightness(0) invert(1) drop-shadow(0 0 20px rgba(0, 242, 254, 0.6));
+            transform: scale(1.1);
+        }
+
+        /* Responsive Design - Enhanced */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .section {
+                padding: 80px 0;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .back-btn {
+                top: 80px;
+                left: 10px;
+            }
+
+            .navbar-nav .nav-link {
+                margin: 0 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .category-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Back Button -->
+    <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="Images/logo.ico" alt="Logo" style="height: 40px; width: auto; border-radius: 5px;">
+                <span class="ms-2">Shri Ganesh Studio</span>
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars" style="color: var(--neon-blue);"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Gallery Section -->
+    <div class="gallery">
+        <div class="container">
+            <h2 class="section-title">Our Complete Portfolio</h2>
+            <div class="section-subtitle">A Visual Journey Through Our Work</div>
+            
+            <div class="gallery-categories mb-5">
+                <button class="category-btn active" data-filter="all">All</button>
+                <button class="category-btn" data-filter="wedding">Weddings</button>
+                <button class="category-btn" data-filter="prewedding">Pre-Wedding</button>
+                <button class="category-btn" data-filter="portrait">Portraits</button>
+                <button class="category-btn" data-filter="event">Events</button>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item" data-category="wedding" data-img="Images/gallery/g1.jpg">
+                    <img src="Images/gallery/g34.jpg" alt="Gallery image 1">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Wedding Ceremony</h5>
+                        <p>Sacred moments captured</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="prewedding" data-img="Images/gallery/g2.jpg">
+                    <img src="Images/gallery/g2.jpg" alt="Gallery image 2">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Pre-Wedding Romance</h5>
+                        <p>Love stories told beautifully</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="portrait" data-img="Images/gallery/g3.jpg">
+                    <img src="Images/gallery/g3.jpg" alt="Gallery image 3">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Portrait Session</h5>
+                        <p>Timeless elegance captured</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="event" data-img="Images/gallery/g4.jpg">
+                    <img src="Images/gallery/g4.jpg" alt="Gallery image 4">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Event Coverage</h5>
+                        <p>Celebrations preserved</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="wedding" data-img="Images/gallery/g5.jpg">
+                    <img src="Images/gallery/g5.jpg" alt="Gallery image 5">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Wedding Celebration</h5>
+                        <p>Joy in every frame</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="prewedding" data-img="Images/gallery/g6.jpg">
+                    <img src="Images/gallery/g6.jpg" alt="Gallery image 6">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Couple Session</h5>
+                        <p>Love captured forever</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="portrait" data-img="Images/gallery/g7.jpg">
+                    <img src="Images/gallery/g7.jpg" alt="Gallery image 7">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Bridal Portrait</h5>
+                        <p>Beauty personified</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="event" data-img="Images/gallery/g8.jpg">
+                    <img src="Images/gallery/g8.jpg" alt="Gallery image 8">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Event Moments</h5>
+                        <p>Special occasions captured</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="wedding" data-img="Images/gallery/g9.jpg">
+                    <img src="Images/gallery/g9.jpg" alt="Gallery image 9">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Traditional Ceremony</h5>
+                        <p>Cultural heritage preserved</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="prewedding" data-img="Images/gallery/g10.jpg">
+                    <img src="Images/gallery/g10.jpg" alt="Gallery image 10">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Romantic Session</h5>
+                        <p>Dreams captured in time</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="portrait" data-img="Images/gallery/g11.jpg">
+                    <img src="Images/gallery/g11.jpg" alt="Gallery image 11">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Family Portrait</h5>
+                        <p>Bonds that last forever</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="event" data-img="Images/gallery/g12.jpg">
+                    <img src="Images/gallery/g12.jpg" alt="Gallery image 12">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Celebration</h5>
+                        <p>Happiness in every moment</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="wedding" data-img="Images/gallery/g13.jpg">
+                    <img src="Images/gallery/g13.jpg" alt="Gallery image 13">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Wedding Ritual</h5>
+                        <p>Sacred traditions honored</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="prewedding" data-img="Images/gallery/g14.jpg">
+                    <img src="Images/gallery/g14.jpg" alt="Gallery image 14">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Engagement Session</h5>
+                        <p>Beginning of forever</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="portrait" data-img="Images/gallery/g15.jpg">
+                    <img src="Images/gallery/g15.jpg" alt="Gallery image 15">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Individual Portrait</h5>
+                        <p>Personality captured</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="event" data-img="Images/gallery/g16.jpg">
+                    <img src="Images/gallery/g16.jpg" alt="Gallery image 16">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Special Occasion</h5>
+                        <p>Memories to treasure</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="wedding" data-img="Images/gallery/g17.jpg">
+                    <img src="Images/gallery/g17.jpg" alt="Gallery image 17">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Wedding Photography</h5>
+                        <p>Eternal moments captured</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="prewedding" data-img="Images/gallery/g18.jpg">
+                    <img src="Images/gallery/g18.jpg" alt="Gallery image 18">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Pre-Wedding Shoot</h5>
+                        <p>Love in perfect frames</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="portrait" data-img="Images/gallery/g19.jpg">
+                    <img src="Images/gallery/g19.jpg" alt="Gallery image 19">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Portrait Photography</h5>
+                        <p>Stories in every face</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="event" data-img="Images/gallery/g20.jpg">
+                    <img src="Images/gallery/g20.jpg" alt="Gallery image 20">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Event Documentation</h5>
+                        <p>Every detail preserved</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="wedding" data-img="Images/gallery/g21.jpg">
+                    <img src="Images/gallery/g21.jpg" alt="Gallery image 21">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Marriage Ceremony</h5>
+                        <p>Sacred vows captured</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="prewedding" data-img="Images/gallery/g22.jpg">
+                    <img src="Images/gallery/g22.jpg" alt="Gallery image 22">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Couple Photography</h5>
+                        <p>Two hearts, one soul</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="portrait" data-img="Images/gallery/g23.jpg">
+                    <img src="Images/gallery/g23.jpg" alt="Gallery image 23">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Professional Portrait</h5>
+                        <p>Excellence in every shot</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="event" data-img="Images/gallery/g24.jpg">
+                    <img src="Images/gallery/g24.jpg" alt="Gallery image 24">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Event Photography</h5>
+                        <p>Moments that matter</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="wedding" data-img="Images/gallery/g25.jpg">
+                    <img src="Images/gallery/g25.jpg" alt="Gallery image 25">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Wedding Day</h5>
+                        <p>Perfect day captured</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="prewedding" data-img="Images/gallery/g26.jpg">
+                    <img src="Images/gallery/g26.jpg" alt="Gallery image 26">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Engagement Photos</h5>
+                        <p>Promise of tomorrow</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="portrait" data-img="Images/gallery/g27.jpg">
+                    <img src="Images/gallery/g27.jpg" alt="Gallery image 27">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Portrait Session</h5>
+                        <p>Capturing true essence</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="event" data-img="Images/gallery/g28.jpg">
+                    <img src="Images/gallery/g28.jpg" alt="Gallery image 28">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Special Events</h5>
+                        <p>Celebrations preserved</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="wedding" data-img="Images/gallery/g29.jpg">
+                    <img src="Images/gallery/g29.jpg" alt="Gallery image 29">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Wedding Bliss</h5>
+                        <p>Happiness captured</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="prewedding" data-img="Images/gallery/g30.jpg">
+                    <img src="Images/gallery/g30.jpg" alt="Gallery image 30">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Love Story</h5>
+                        <p>Romance in frames</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="portrait" data-img="Images/gallery/g31.jpg">
+                    <img src="Images/gallery/g31.jpg" alt="Gallery image 31">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Portrait Art</h5>
+                        <p>Artistic excellence</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="event" data-img="Images/gallery/g32.jpg">
+                    <img src="Images/gallery/g32.jpg" alt="Gallery image 32">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Event Memories</h5>
+                        <p>Treasured moments</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="wedding" data-img="Images/gallery/g33.jpg">
+                    <img src="Images/gallery/g33.jpg" alt="Gallery image 33">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Sacred Union</h5>
+                        <p>Divine moments captured</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="prewedding" data-img="Images/gallery/g34.jpg">
+                    <img src="Images/gallery/g1.jpg" alt="Gallery image 34">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                        <h5>Pre-Wedding Magic</h5>
+                        <p>Dreams come true</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <img src="Images/logooutline.webp" alt="Shri Ganesh Studio" class="footer-logo mb-3">
+                    <p>Preserving your precious moments with artistic excellence and divine blessings since 2010.</p>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html">Home</a></li>
+                        <li class="mb-2"><a href="index.html#about">About Us</a></li>
+                        <li class="mb-2"><a href="index.html#services">Services</a></li>
+                        <li class="mb-2"><a href="gallery.html">Gallery</a></li>
+                        <li class="mb-2"><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5>Connect With Us</h5>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/919557306414"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="row">
+                <div class="col-md-6 text-md-start text-center mb-3 mb-md-0">
+                    <p class="mb-0">&copy; 2023 Shri Ganesh Studio. All Rights Reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end text-center">
+                    <p class="mb-0">
+                        Designed with <i class="fas fa-heart text-danger"></i> by 
+                        <a href="https://yuvancreations.github.io/yuvancreations" target="_blank" class="text-decoration-none fw-bold">
+                            YUVAN CREATIONS
+                        </a> | 📞 9557300217
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Image Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close" style="z-index: 10; background: rgba(255,255,255,0.5);"></button>
+                    <img src="" alt="" class="img-fluid" id="modalImage">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <script>
+        // Preloader
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            setTimeout(function() {
+                preloader.classList.add('hide');
+                setTimeout(function() {
+                    preloader.style.display = 'none';
+                }, 500);
+            }, 1500);
+        });
+
+        // Gallery filtering
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.category-btn').forEach(b => {
+                    b.classList.remove('active');
+                });
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const filter = this.getAttribute('data-filter');
+                const galleryItems = document.querySelectorAll('.gallery-item');
+                
+                galleryItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Gallery modal
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const imgSrc = this.getAttribute('data-img');
+                document.getElementById('modalImage').setAttribute('src', imgSrc);
+                const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+                modal.show();
+            });
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shri Ganesh Studio - Professional Photography Services</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --tertiary-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+            --text-accent: #667eea;
+            --neon-blue: #00f2fe;
+            --neon-pink: #f5576c;
+            --neon-purple: #667eea;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            background: var(--dark-gradient);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-gradient);
+            border-radius: 10px;
+        }
+
+        /* Preloader with Modern Design */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease;
+        }
+
+        .preloader.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 3px solid transparent;
+            border-top: 3px solid var(--neon-blue);
+            border-right: 3px solid var(--neon-pink);
+            border-radius: 50%;
+            animation: modernSpin 1s linear infinite;
+            position: relative;
+        }
+
+        .loader::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 2px solid transparent;
+            border-left: 2px solid var(--neon-purple);
+            border-radius: 50%;
+            animation: modernSpin 0.8s linear infinite reverse;
+        }
+
+        @keyframes modernSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Navigation - Glassmorphism Design */
+        .navbar {
+            background: rgba(12, 12, 12, 0.8) !important;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1rem 0;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 1000;
+        }
+
+        .navbar.scrolled {
+            background: rgba(12, 12, 12, 0.95) !important;
+            padding: 0.5rem 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar-brand {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.5));
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--text-secondary) !important;
+            font-weight: 500;
+            margin: 0 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            padding: 12px 0 !important;
+        }
+
+        .navbar-nav .nav-link::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: var(--tertiary-gradient);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--text-primary) !important;
+            transform: translateY(-2px);
+        }
+
+        .navbar-nav .nav-link:hover::before {
+            width: 100%;
+        }
+
+        /* Hero Section - Cinematic Design */
+        .hero {
+            height: 100vh;
+            background: 
+                linear-gradient(45deg, rgba(12, 12, 12, 0.8) 0%, rgba(102, 126, 234, 0.2) 50%, rgba(12, 12, 12, 0.8) 100%),
+                url('https://images.unsplash.com/photo-1606216794074-735e91aa2c92?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2087&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(245, 87, 108, 0.2) 0%, transparent 50%);
+            animation: modernPulse 8s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes modernPulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 0.8; }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: var(--text-primary);
+            max-width: 1000px;
+            padding: 0 20px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+
+        .hero-subtitle {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            color: var(--neon-blue);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: slideInUp 1s ease 0.3s forwards;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #ffffff 0%, #667eea 50%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            animation: slideInUp 1s ease 0.6s forwards;
+            line-height: 1.1;
+            text-shadow: none;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            font-weight: 300;
+            letter-spacing: 1px;
+            animation: slideInUp 1s ease 0.9s forwards;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: slideInUp 1s ease 1.2s forwards;
+        }
+
+        /* Modern Button Design */
+        .btn-modern {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            padding: 18px 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-modern::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            transition: left 0.6s ease;
+            z-index: -1;
+        }
+
+        .btn-modern:hover::before {
+            left: 0;
+        }
+
+        .btn-modern:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+            color: var(--text-primary);
+            border-color: var(--neon-purple);
+        }
+
+        .btn-outline-modern {
+            background: transparent;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 16px 38px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-outline-modern:hover {
+            background: var(--tertiary-gradient);
+            color: var(--text-primary);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 242, 254, 0.4);
+            border-color: transparent;
+        }
+
+        /* Floating Elements - Modern */
+        .floating-element {
+            position: absolute;
+            opacity: 0.3;
+            animation: modernFloat 6s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+            color: var(--neon-blue);
+        }
+
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+            color: var(--neon-pink);
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+            color: var(--neon-purple);
+        }
+
+        @keyframes modernFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+            33% { transform: translateY(-20px) rotate(120deg) scale(1.1); }
+            66% { transform: translateY(10px) rotate(240deg) scale(0.9); }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styling - Modern */
+        .section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--neon-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .section-subtitle {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 300;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background: var(--tertiary-gradient);
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50);
+            border-radius: 10px;
+        }
+
+        /* About Section - Glassmorphism */
+        .about {
+            background: var(--dark-gradient);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 70%, rgba(102, 126, 234, 0.1) 0%, transparent 60%),
+                radial-gradient(circle at 70% 30%, rgba(245, 87, 108, 0.1) 0%, transparent 60%);
+        }
+
+        .about-content {
+            font-size: 1.2rem;
+            line-height: 2;
+            color: var(--text-secondary);
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stats-container {
+            margin-top: 4rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        /* Services Section - Dark Theme */
+        .services {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 100%);
+            color: var(--text-primary);
+            position: relative;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(0, 242, 254, 0.1) 0%, transparent 50%);
+        }
+
+        .service-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            padding: 3rem 2rem;
+            border-radius: 25px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            height: 100%;
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .service-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-20px) scale(1.05);
+            box-shadow: 0 30px 60px rgba(102, 126, 234, 0.3);
+            border-color: var(--neon-purple);
+        }
+
+        .service-icon {
+            font-size: 4rem;
+            background: var(--tertiary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.3) rotate(10deg);
+            filter: drop-shadow(0 0 20px rgba(0, 242, 254, 0.5));
+        }
+
+        .service-card h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* Gallery Section - 3D Modern */
+        .gallery {
+            background: var(--dark-gradient);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(245, 87, 108, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(102, 126, 234, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 25px;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-style: preserve-3d;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--secondary-gradient);
+            opacity: 0;
+            z-index: 2;
+            transition: opacity 0.4s ease;
+            border-radius: 25px;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 0.3;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-15px) rotateX(5deg) rotateY(5deg) scale(1.05);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-radius: 25px;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.2);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(12, 12, 12, 0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 3;
+            border-radius: 25px;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay i {
+            color: var(--neon-blue);
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: modernFloat 2s ease-in-out infinite;
+        }
+
+        .gallery-overlay h5 {
+            color: var(--text-primary);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            text-align: center;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-overlay p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-align: center;
+            font-weight: 300;
+        }
+
+        /* Modal Styling - Modern */
+        .modal-content {
+            background: rgba(12, 12, 12, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+        }
+
+        .modal-body {
+            padding: 0;
+        }
+
+        .modal-body img {
+            width: 100%;
+            border-radius: 25px;
+        }
+
+        /* Gallery Page Styles - Modern */
+        .gallery-page {
+            min-height: 100vh;
+            padding-top: 100px;
+            background: var(--dark-gradient);
+        }
+
+        .gallery-categories {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .category-btn {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+            padding: 12px 30px;
+            margin: 0 10px 10px 0;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .category-btn.active,
+        .category-btn:hover {
+            background: var(--primary-gradient);
+            color: var(--text-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 100px;
+            left: 20px;
+            z-index: 1000;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            color: var(--text-primary);
+            border: 1px solid var(--glass-border);
+            padding: 15px 20px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.1);
+            background: var(--primary-gradient);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Contact Section - Ultra Modern */
+        .contact {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            color: var(--text-primary);
+            position: relative;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 40% 40%, rgba(0, 242, 254, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 60% 60%, rgba(245, 87, 108, 0.1) 0%, transparent 50%);
+        }
+
+        .contact-info {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            padding: 3rem;
+            border-radius: 25px;
+            margin-bottom: 2rem;
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .contact-info:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .contact-info h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--tertiary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+            padding: 1rem;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .contact-item i {
+            color: var(--neon-blue);
+            font-size: 1.5rem;
+            margin-right: 20px;
+            width: 25px;
+        }
+
+        .form-control {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            padding: 18px 25px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-control::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--neon-purple);
+            color: var(--text-primary);
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+            transform: translateY(-2px);
+        }
+
+        /* Footer - Futuristic */
+        .footer {
+            background: linear-gradient(135deg, #0c0c0c 0%, #000000 100%);
+            color: var(--text-primary);
+            padding: 4rem 0 2rem;
+            text-align: center;
+            position: relative;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--tertiary-gradient);
+        }
+
+        .footer h5 {
+            color: var(--neon-blue);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+        }
+
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--neon-purple);
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            margin: 3rem 0;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            color: var(--neon-blue);
+            font-size: 1.5rem;
+            margin: 0 15px;
+            border-radius: 50%;
+            transition: all 0.4s ease;
+            border: 1px solid var(--glass-border);
+            transform: translateY(0);
+        }
+
+        .social-links a:hover {
+            background: var(--primary-gradient);
+            color: var(--text-primary);
+            transform: translateY(-10px) scale(1.1);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        .footer-logo {
+            height: 80px;
+            filter: brightness(0) invert(1);
+            transition: all 0.3s ease;
+        }
+
+        .footer-logo:hover {
+            filter: brightness(0) invert(1) drop-shadow(0 0 20px rgba(0, 242, 254, 0.6));
+            transform: scale(1.1);
+        }
+
+        /* Responsive Design - Enhanced */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .section {
+                padding: 80px 0;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-modern,
+            .btn-outline-modern {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .back-btn {
+                top: 80px;
+                left: 10px;
+            }
+
+            .navbar-nav .nav-link {
+                margin: 0 10px;
+            }
+
+            .service-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .contact-info {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .btn-modern,
+            .btn-outline-modern {
+                padding: 15px 30px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Animation Keyframes - Advanced */
+        @keyframes morphButton {
+            0% { border-radius: 50px; }
+            50% { border-radius: 15px; }
+            100% { border-radius: 50px; }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(102, 126, 234, 0.6); }
+        }
+
+        @keyframes textShimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* Utility Classes */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+        }
+
+        .neon-text {
+            background: var(--tertiary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hover-lift {
+            transition: transform 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-10px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Main Website -->
+    <div id="main-site">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <img src="Images/logo.ico" alt="Logo" style="height: 40px; width: auto; border-radius: 5px;">
+                    <span class="ms-2">Shri Ganesh Studio</span>
+                </a>
+
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <i class="fas fa-bars" style="color: var(--neon-blue);"></i>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="Images/vid/vid1.mp4" type="video/mp4">
+            </video>
+            <div class="floating-element">
+                <i class="fas fa-camera" style="font-size: 3rem;"></i>
+            </div>
+            <div class="floating-element">
+                <i class="fas fa-heart" style="font-size: 2rem;"></i>
+            </div>
+            <div class="floating-element">
+                <i class="fas fa-star" style="font-size: 2.5rem;"></i>
+            </div>
+            
+            <div class="hero-content">
+                <div class="hero-subtitle">Capturing Dreams Since 2010</div>
+                <h1>Welcome to Shri Ganesh Studio</h1>
+                <p>Where Every Frame Tells Your Beautiful Story</p>
+                <div class="hero-buttons">
+                    <a href="https://wa.me/919557306414" class="btn-modern">
+                        <i class="fab fa-whatsapp"></i>
+                        Book Your Session
+                    </a>
+                    <a href="gallery.html" class="btn-outline-modern">
+                        <i class="fas fa-images"></i>
+                        View Gallery
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section about">
+            <div class="container">
+                <h2 class="section-title">About Our Studio</h2>
+                <div class="section-subtitle">Crafting Visual Masterpieces</div>
+                <div class="about-content">
+                    <p>At Shri Ganesh Studio, we don't just capture photographs – we create timeless art that preserves your most precious moments forever. Located in the sacred city of Haridwar, we bring divine blessings and artistic excellence to every frame.</p>
+                    <p>With over a decade of experience in the art of photography, our passionate team specializes in transforming fleeting moments into eternal memories. From the sacred rituals of traditional weddings to contemporary celebrations, we blend cultural heritage with modern aesthetics.</p>
+                    <p>Every click of our camera is a prayer, every frame a blessing, ensuring your memories are not just captured but celebrated with the reverence they deserve.</p>
+                </div>
+                
+                <div class="stats-container">
+                    <div class="row g-4">
+                        <div class="col-md-3 col-6">
+                            <div class="stat-item hover-lift">
+                                <span class="stat-number counter" data-target="10000">0</span>
+                                <div class="stat-label">Happy Couples</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="stat-item hover-lift">
+                                <span class="stat-number counter" data-target="5000">0</span>
+                                <div class="stat-label">Events Covered</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="stat-item hover-lift">
+                                <span class="stat-number counter" data-target="15">0</span>
+                                <div class="stat-label">Years Experience</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="stat-item hover-lift">
+                                <span class="stat-number counter" data-target="100000">0</span>
+                                <div class="stat-label">Photos Captured</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="section services">
+            <div class="container">
+                <h2 class="section-title">Our Premium Services</h2>
+                <div class="section-subtitle">Excellence in Every Frame</div>
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fa-solid fa-ring"></i>
+                            </div>
+                            <h4>Wedding Photography</h4>
+                            <p>Comprehensive wedding coverage capturing every sacred moment, from mehendi ceremonies to reception celebrations, with cinematic storytelling.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <h4>Pre-wedding Shoots</h4>
+                            <p>Romantic and artistic pre-wedding sessions in breathtaking locations, creating magical moments before your big day.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fa-solid fa-calendar-days"></i>
+                            </div>
+                            <h4>Event Coverage</h4>
+                            <p>Professional documentation of corporate events, birthday parties, anniversaries, and special celebrations with artistic flair.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fa-solid fa-users"></i>
+                            </div>
+                            <h4>Portrait Sessions</h4>
+                            <p>Professional portraits for individuals, families, and corporate headshots with studio-quality lighting and composition.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fa-solid fa-video"></i>
+                            </div>
+                            <h4>Cinematic Videography</h4>
+                            <p>Award-winning wedding films and event videography with drone shots, slow motion, and professional editing.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            </div>
+                            <h4>Premium Editing</h4>
+                            <p>Advanced photo and video editing with color grading, retouching, and artistic enhancements to perfect your memories.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Preview Section -->
+        <section id="gallery-preview" class="section gallery">
+            <div class="container">
+                <h2 class="section-title">Our Portfolio</h2>
+                <div class="section-subtitle">Moments That Matter</div>
+                
+                <div class="gallery-grid">
+                    <div class="gallery-item" data-img="Images/gallery/g1.jpg">
+                        <img src="Images/gallery/g1.jpg" alt="Wedding Ceremony">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-expand"></i>
+                            <h5>Sacred Wedding Moments</h5>
+                            <p>Capturing the essence of your special day</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" data-img="Images/gallery/g2.jpg">
+                        <img src="Images/gallery/g2.jpg" alt="Bridal Portrait">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-expand"></i>
+                            <h5>Bridal Elegance</h5>
+                            <p>Timeless beauty captured forever</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" data-img="Images/gallery/g3.jpg">
+                        <img src="Images/gallery/g3.jpg" alt="Wedding Reception">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-expand"></i>
+                            <h5>Celebration Moments</h5>
+                            <p>Joy and laughter in every frame</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" data-img="Images/gallery/g4.jpg">
+                        <img src="Images/gallery/g4.jpg" alt="Pre-wedding Romance">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-expand"></i>
+                            <h5>Pre-wedding Romance</h5>
+                            <p>Love stories beautifully told</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" data-img="Images/gallery/g5.jpg">
+                        <img src="Images/gallery/g5.jpg" alt="Family Joy">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-expand"></i>
+                            <h5>Family Bonds</h5>
+                            <p>Generations united in celebration</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" data-img="Images/gallery/g6.jpg">
+                        <img src="Images/gallery/g6.jpg" alt="Traditional Ceremony">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-expand"></i>
+                            <h5>Traditional Rituals</h5>
+                            <p>Sacred traditions preserved</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <a href="gallery.html" class="btn-modern">
+                        <i class="fas fa-images"></i>
+                        View Complete Gallery
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section contact">
+            <div class="container">
+                <h2 class="section-title">Let's Create Magic Together</h2>
+                <div class="section-subtitle">Contact Us Today</div>
+                <div class="row align-items-stretch">
+                    <div class="col-lg-6 mb-4 d-flex">
+                        <div class="contact-info glass-card p-4 w-100 h-100">
+                            <h4>Get in Touch</h4>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <strong>Studio Address</strong><br>
+                                    Jhanda Chawk, Kankhal<br>
+                                    Haridwar-249408, Uttarakhand, India
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone-alt"></i>
+                                <div>
+                                    <strong>Call Us</strong><br>
+                                    +91 9557306414
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <strong>Email Us</strong><br>
+                                    sgskankhal@gmail.com
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-clock"></i>
+                                <div>
+                                    <strong>Studio Hours</strong><br>
+                                    Monday - Sunday: 9:00 AM - 8:00 PM
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 d-flex">
+                        <form action="https://api.web3forms.com/submit" method="POST" id="contactForm" class="contact-form glass-card p-4 w-100 h-100 d-flex flex-column">
+                            <input type="hidden" name="access_key" value="e9f21912-91bc-4032-9cd2-d9c3f9a818ef">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Your Full Name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Your Email Address" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Your Phone Number" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <select class="form-control" id="service" name="service">
+                                        <option value="">Select Service</option>
+                                        <option value="wedding">Wedding Photography</option>
+                                        <option value="prewedding">Pre-wedding Shoot</option>
+                                        <option value="events">Event Coverage</option>
+                                        <option value="portraits">Portrait Session</option>
+                                        <option value="videography">Videography</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="date" class="form-control" id="eventDate" name="eventDate" placeholder="Event Date">
+                            </div>
+                            <div class="mb-4 flex-grow-1">
+                                <textarea class="form-control" id="message" name="message" rows="5" placeholder="Tell us about your special day and requirements..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn-modern w-100 btn-lg mt-auto">
+                                <i class="fas fa-paper-plane me-2"></i>Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="glass-card p-2" style="overflow:hidden;border-radius:12px;">
+                            <div class="ratio ratio-16x9">
+                                <iframe
+                                    src="https://www.google.com/maps?q=Jhanda%20Chawk%2C%20Kankhal%2C%20Haridwar-249408%2C%20Uttarakhand%2C%20India&output=embed"
+                                    style="border:0;"
+                                    allowfullscreen=""
+                                    loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 mb-4">
+                        <img src="Images/logooutline.webp" alt="Shri Ganesh Studio" class="footer-logo mb-3">
+                        <p>Preserving your precious moments with artistic excellence and divine blessings since 2010.</p>
+                    </div>
+                    <div class="col-lg-4 mb-4">
+                        <h5>Quick Links</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="#home">Home</a></li>
+                            <li class="mb-2"><a href="#about">About Us</a></li>
+                            <li class="mb-2"><a href="#services">Services</a></li>
+                            <li class="mb-2"><a href="gallery.html">Gallery</a></li>
+                            <li class="mb-2"><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 mb-4">
+                        <h5>Connect With Us</h5>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/919557306414"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+                <div class="row">
+                    <div class="col-md-6 text-md-start text-center mb-3 mb-md-0">
+                        <p class="mb-0">&copy; 2025 Shri Ganesh Studio. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end text-center">
+                        <p class="mb-0">
+                            Designed with <i class="fas fa-heart text-danger"></i> by 
+                            <a href="https://yuvancreations.github.io/yuvancreations" target="_blank" class="text-decoration-none fw-bold">
+                                YUVAN CREATIONS
+                            </a> | 📞 9557300217
+                        </p>
+                    </div>
+                    
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Image Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close" style="z-index: 10; background: rgba(255,255,255,0.5);"></button>
+                    <img src="" alt="" class="img-fluid" id="modalImage">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <script>
+        // Preloader
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            setTimeout(function() {
+                preloader.classList.add('hide');
+                setTimeout(function() {
+                    preloader.style.display = 'none';
+                }, 500);
+            }, 1500);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Counter animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter');
+            const speed = 200;
+            
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const increment = target / speed;
+                
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + increment);
+                    setTimeout(animateCounters, 1);
+                } else {
+                    counter.innerText = target;
+                }
+            });
+        }
+
+        // Initialize counters when section is in view
+        const aboutSection = document.getElementById('about');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(aboutSection);
+
+        // Gallery modal
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const imgSrc = this.getAttribute('data-img');
+                document.getElementById('modalImage').setAttribute('src', imgSrc);
+                const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+                modal.show();
+            });
+        });
+
+        // Contact form submission: allow Web3Forms default submission, otherwise fallback alert
+        (function() {
+            const form = document.getElementById('contactForm');
+            if (!form) return;
+            form.addEventListener('submit', function(e) {
+                const action = (this.getAttribute('action') || '').toLowerCase();
+                if (!action.includes('web3forms')) {
+                    e.preventDefault();
+                    alert('Thank you for your message! We will contact you soon.');
+                    this.reset();
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
